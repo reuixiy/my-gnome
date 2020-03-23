@@ -28,7 +28,7 @@ dconf load /org/gnome/shell/extensions/ < shell-extensions/config.toml
 
 # gedit
 cp -r gedit/* ~/.local/share/gedit/
-dconf load /org/gnome/gedit/plugins/ < gedit/config.toml
+dconf load /org/gnome/gedit/plugins/ < gedit/plugins/config.toml
 
 # icons
 cd ~/.icons
