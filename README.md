@@ -28,7 +28,7 @@ dconf load /org/gnome/shell/extensions/ < shell-extensions/config.toml
 
 # gedit
 cp -r gedit/* ~/.local/share/gedit/
-gsettings set org.gnome.gedit.plugins active-plugins ['time', 'fullscreen_margins', 'linespacing']
+dconf load /org/gnome/gedit/plugins/ < gedit/config.toml
 
 # icons
 cd ~/.icons
