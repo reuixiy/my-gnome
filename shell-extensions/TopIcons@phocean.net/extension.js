@@ -371,10 +371,14 @@ function setSize(icon) {
     let scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
 
     if (arguments.length == 1) {
-        icon.set_size(iconSize * scaleFactor, iconSize * scaleFactor);
+        //icon.set_size(iconSize * scaleFactor, iconSize * scaleFactor);
+        icon.set_height(iconSize * scaleFactor);
+        icon.set_y_align(Clutter.ActorAlign.CENTER);
     } else {
         for (let i = 0; i < icon.length; i++) {
-            icon[i].set_size(iconSize * scaleFactor, iconSize * scaleFactor);
+            //icon.set_size(iconSize * scaleFactor, iconSize * scaleFactor);
+            icon.set_height(iconSize * scaleFactor);
+            icon.set_y_align(Clutter.ActorAlign.CENTER);
         }
     }
 

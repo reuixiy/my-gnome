@@ -302,11 +302,15 @@ Switcher.prototype = {
 
     _keyPressEvent: function(actor, event) {
         switch(event.get_key_symbol()) {
+            case Clutter.KEY_Escape:
             case Clutter.Escape:
                 // Esc -> close CoverFlow
                 this.destroy();
                 return true;
 
+            case Clutter.KEY_q:
+            case Clutter.KEY_Q:
+            case Clutter.KEY_F4:
             case Clutter.q:
             case Clutter.Q:
             case Clutter.F4:
@@ -315,7 +319,9 @@ Switcher.prototype = {
                 this._checkDestroyedTimeoutId = Mainloop.timeout_add(CHECK_DESTROYED_TIMEOUT,
                         Lang.bind(this, this._checkDestroyed, this._windows[this._currentIndex]));
                 return true;
-
+                
+            case Clutter.KEY_Right:
+            case Clutter.KEY_Down:
             case Clutter.Right:
             case Clutter.Down:
                 // Right/Down -> navigate to next preview
@@ -323,6 +329,8 @@ Switcher.prototype = {
                     this._next();
                 return true;
 
+            case Clutter.KEY_Left:
+            case Clutter.KEY_Up:
             case Clutter.Left:
             case Clutter.Up:
                 // Left/Up -> navigate to previous preview
@@ -330,6 +338,8 @@ Switcher.prototype = {
                     this._previous();
                 return true;
 
+            case Clutter.KEY_d:
+            case Clutter.KEY_D:
             case Clutter.d:
             case Clutter.D:
                 // D -> Show desktop
