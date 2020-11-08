@@ -1,0 +1,88 @@
+# Brazilian Portuguese translation for hidetopbar
+# Copyright (C) 2020 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the hidetopbar package.
+# Marcos Nascimento <wstlmn@uol.com.br>, 2017.
+# Rafael Fontenelle <rafaelff@gnome.org>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hidetopbar\n"
+"Report-Msgid-Bugs-To: https://github.com/mlutfy/hidetopbar/issues\n"
+"POT-Creation-Date: 2020-06-27 21:18-0300\n"
+"PO-Revision-Date: 2020-06-27 21:24-0300\n"
+"Last-Translator: Rafael Fontenelle <rafaelff@gnome.org>\n"
+"Language-Team: Brazilian Portuguese\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Gtranslator 3.36.0\n"
+"Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: prefs.js:57
+msgid "<b>Sensitivity</b>"
+msgstr "<b>Sensibilidade</b>"
+
+#: prefs.js:64
+msgid "Show panel when mouse approaches edge of the screen"
+msgstr "Mostrar painel quando o mouse se aproximar da borda da tela"
+
+#: prefs.js:65
+msgid "In the above case, also show panel when fullscreen"
+msgstr "No caso acima, também mostrar o painel quando em tela cheia"
+
+#: prefs.js:66
+msgid "Keep hot corner sensitive, even in hidden state"
+msgstr "Manter o canto responsivo, mesmo no estado oculto"
+
+#: prefs.js:67
+msgid "In the above case show overview, too"
+msgstr "No caso acima, também mostrar o panorama de atividades"
+
+#: prefs.js:92
+msgid "Pressure barrier's threshold:"
+msgstr "Limiar da barreira de pressão:"
+
+#: prefs.js:93
+msgid "Pressure barrier's timeout:"
+msgstr "Tempo limite da barreira de pressão:"
+
+#: prefs.js:122
+msgid "<b>Animation</b>"
+msgstr "<b>Animação</b>"
+
+#: prefs.js:129
+msgid "Slide animation time when entering/leaving overview:"
+msgstr "Tempo de animação ao entrar/sair do panorama de atividades:"
+
+#: prefs.js:130
+msgid "Slide animation time when mouse approaches edge of the screen:"
+msgstr "Tempo de animação quando o mouse se aproximar da borda da tela:"
+
+#: prefs.js:159
+msgid "<b>Keyboard shortcuts</b>"
+msgstr "<b>Atalhos de teclado</b>"
+
+#: prefs.js:221
+msgid "Key that triggers the bar to be shown:"
+msgstr "Tecla que aciona a barra a ser mostrada:"
+
+#: prefs.js:241
+msgid "Delay before the bar rehides after key press:"
+msgstr "Atraso até a barra ocultar novamente após pressionar tecla:"
+
+#: prefs.js:257
+msgid "Pressing the shortcut again rehides the panel"
+msgstr "Pressionar o atalho novamente oculta o painel"
+
+#: prefs.js:286
+msgid "<b>Intellihide</b>"
+msgstr "<b>Ação inteligente</b>"
+
+#: prefs.js:293
+msgid "Only hide panel when a window takes the space"
+msgstr "Somente ocultar quando a janela ocupar o espaço"
+
+#: prefs.js:294
+msgid "Only when the active window takes the space"
+msgstr "Somente ocultar quando a janela ativa ocupar o espaço"

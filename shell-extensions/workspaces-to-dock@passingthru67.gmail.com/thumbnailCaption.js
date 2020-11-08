@@ -2,12 +2,14 @@ const _DEBUG_ = false;
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const GObject = imports.gi.GObject;
 const Clutter = imports.gi.Clutter;
 const Lang = imports.lang;
 const Meta = imports.gi.Meta;
 const Shell = imports.gi.Shell;
 const Signals = imports.signals;
 const St = imports.gi.St;
+const Graphene = imports.gi.Graphene;
 
 const Main = imports.ui.main;
 const WorkspacesView = imports.ui.workspacesView;
@@ -19,7 +21,8 @@ const PopupMenu = imports.ui.popupMenu;
 const DND = imports.ui.dnd;
 
 const Util = imports.misc.util;
-const Me = imports.misc.extensionUtils.getCurrentExtension();
+const ExtensionUtils = imports.misc.extensionUtils;
+const Me = ExtensionUtils.getCurrentExtension();
 const Convenience = Me.imports.convenience;
 const MyWorkspaceThumbnail = Me.imports.myWorkspaceThumbnail;
 
@@ -54,8 +57,10 @@ function getPosition(settings) {
     return position;
 }
 
-var TaskbarIcon = class WorkspacesToDock_TaskbarIcon {
-    constructor(app, metaWin, caption) {
+
+var TaskbarIcon = GObject.registerClass({},
+class WorkspacesToDock_TaskbarIcon extends GObject.Object {
+    _init(app, metaWin, caption) {
         this._caption = caption;
         this._mySettings = caption._mySettings;
         this._app = app;
@@ -226,7 +231,7 @@ var TaskbarIcon = class WorkspacesToDock_TaskbarIcon {
             }
         });
     }
-};
+});
 
 var MenuTaskListItem = class WorkspacesToDock_MenuTaskListItem {
     constructor(app, metaWin, caption) {
@@ -333,7 +338,6 @@ var ThumbnailCaption = class WorkspacesToDock_ThumbnailCaption {
             name: 'workspacestodockCaptionContainer',
             reactive: false,
             style_class: 'workspacestodock-workspace-caption-container',
-            x_fill: true,
             y_align: this._captionYAlign,
             x_align: Clutter.ActorAlign.START
         });
@@ -642,23 +646,22 @@ var ThumbnailCaption = class WorkspacesToDock_ThumbnailCaption {
             let app = tracker.get_window_app(metaWin);
             if (app) {
                 if (_DEBUG_) global.log("myWorkspaceThumbnail: _initTaskbar - window button app = "+app.get_name());
-                let button = new TaskbarIcon(app, metaWin, this);
-                if (metaWin.has_focus()) {
-                    button.actor.add_style_class_name('workspacestodock-caption-windowapps-button-active');
-                }
+                if(this._taskBarBox){
+                    let button = new TaskbarIcon(app, metaWin, this);
+                    if (metaWin.has_focus()) {
+                        button.actor.add_style_class_name('workspacestodock-caption-windowapps-button-active');
+                    }
 
-                if ((this._isMyWindow(windows[i]) && this._isOverviewWindow(windows[i])) ||
-                    (this._isMyWindow(windows[i]) && this._isMinimizedWindow(windows[i])) ||
-                    this._showWindowAppOnThisWorkspace(windows[i])) {
-                    button.actor.visible = true;
-                } else {
-                    button.actor.visible = false;
-                }
+                    if ((this._isMyWindow(windows[i]) && this._isOverviewWindow(windows[i])) ||
+                        (this._isMyWindow(windows[i]) && this._isMinimizedWindow(windows[i])) ||
+                        this._showWindowAppOnThisWorkspace(windows[i])) {
+                        button.actor.visible = true;
+                    } else {
+                        button.actor.visible = false;
+                    }
 
-                if (this._taskBarBox) {
                     this._taskBarBox.add_actor(button.actor);
                 }
-
                 let winInfo = {};
                 winInfo.app = app;
                 winInfo.metaWin = metaWin;
@@ -847,9 +850,11 @@ var ThumbnailCaption = class WorkspacesToDock_ThumbnailCaption {
     }
 
     _showExtensionPreferences(menuItem, event) {
-        // passingthru67: Should we use commandline or argv?
-        // Util.trySpawnCommandLine("gnome-shell-extension-prefs " + Me.metadata.uuid);
-        Util.spawn(["gnome-shell-extension-prefs", Me.metadata.uuid]);
+        if (typeof ExtensionUtils.openPrefs === 'function') {
+            ExtensionUtils.openPrefs();
+        } else {
+            Util.spawn(["gnome-shell-extension-prefs", Me.metadata.uuid]);
+        }
     }
 
     closeMetaWindow(metaWin) {
@@ -911,20 +916,19 @@ var ThumbnailCaption = class WorkspacesToDock_ThumbnailCaption {
                     let app = tracker.get_window_app(metaWin);
                     if (app) {
                         if (_DEBUG_) global.log("myWorkspaceThumbnail: updateTaskbar - window button app = "+app.get_name());
-                        let button = new TaskbarIcon(app, metaWin, this);
-                        if (metaWin.has_focus()) {
-                            button.actor.add_style_class_name('workspacestodock-caption-windowapps-button-active');
-                        }
-
-                        if ((this._isMyWindow(metaWin, true) && this._isOverviewWindow(metaWin, true)) ||
-                            (this._isMyWindow(metaWin, true) && this._isMinimizedWindow(metaWin, true)) ||
-                            this._showWindowAppOnThisWorkspace(metaWin, true)) {
-                            button.actor.visible = true;
-                        } else {
-                            button.actor.visible = false;
-                        }
-
                         if (this._taskBarBox) {
+                            let button = new TaskbarIcon(app, metaWin, this);
+                            if (metaWin.has_focus()) {
+                                button.actor.add_style_class_name('workspacestodock-caption-windowapps-button-active');
+                            }
+
+                            if ((this._isMyWindow(metaWin, true) && this._isOverviewWindow(metaWin, true)) ||
+                                (this._isMyWindow(metaWin, true) && this._isMinimizedWindow(metaWin, true)) ||
+                                this._showWindowAppOnThisWorkspace(metaWin, true)) {
+                                button.actor.visible = true;
+                            } else {
+                                button.actor.visible = false;
+                            }
                             this._taskBarBox.add_actor(button.actor);
                         }
 

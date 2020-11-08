@@ -1,17 +1,29 @@
-//
-// Hides the Gnome "top bar" except in overview mode.
-// https://extensions.gnome.org/extension/545/hide-top-bar/
-// https://github.com/mlutfy/hidetopbar
-//
-// See README for more information.
-//
+/**
+ * This file is part of Hide Top Bar
+ *
+ * Copyright 2020 Thomas Vogt
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 const Main = imports.ui.main;
 
-const Me = imports.misc.extensionUtils.getCurrentExtension();
-const Convenience = Me.imports.convenience;
+const ExtensionUtils = imports.misc.extensionUtils;
+
+const Me = ExtensionUtils.getCurrentExtension();
 const PanelVisibilityManager = Me.imports.panelVisibilityManager;
-const DEBUG = Convenience.DEBUG;
+const DEBUG = Me.imports.convenience.DEBUG;
 
 let mSettings = null;
 let mPVManager = null;
@@ -21,7 +33,7 @@ function init() { }
 
 function enable() {
     DEBUG("enable()");
-    mSettings = Convenience.getSettings();
+    mSettings = ExtensionUtils.getSettings();
     monitorIndex = Main.layoutManager.primaryIndex;
     mPVManager = new PanelVisibilityManager.PanelVisibilityManager(mSettings, monitorIndex);
 }

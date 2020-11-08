@@ -1,3 +1,22 @@
+/**
+ * This file is part of Hide Top Bar
+ *
+ * Copyright 2020 Thomas Vogt
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 const Gtk = imports.gi.Gtk;
 const GObject = imports.gi.GObject;
 
@@ -6,13 +25,12 @@ const _ = Gettext.gettext;
 
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
-const Convenience = Me.imports.convenience;
 
 let settings;
 
 function init() {
-    settings = Convenience.getSettings();
-    Convenience.initTranslations("hidetopbar");
+    settings = ExtensionUtils.getSettings();
+    ExtensionUtils.initTranslations("hidetopbar");
 }
 
 function buildPrefsWidget() {
@@ -44,7 +62,7 @@ function buildPrefsWidget() {
     settings_vbox = new Gtk.VBox({margin_left: 20, margin_top: 10, spacing: 6});
     settings_array = [
         ['mouse-sensitive',_("Show panel when mouse approaches edge of the screen")],
-        ['mouse-sensitive-fullscreen-window',_("In the above case, also show panel when fullscreen.")],
+        ['mouse-sensitive-fullscreen-window',_("In the above case, also show panel when fullscreen")],
         ['hot-corner',_("Keep hot corner sensitive, even in hidden state")],
         ['mouse-triggers-overview',_("In the above case show overview, too")],
     ];
@@ -71,8 +89,8 @@ function buildPrefsWidget() {
 
     settings_vbox = new Gtk.VBox({margin_left: 20, margin_bottom: 10, spacing: 6});
     settings_array = [
-        ['pressure-threshold',_("Pressure barrier's threshold.")],
-        ['pressure-timeout',_("Pressure barrier's timeout.")]
+        ['pressure-threshold',_("Pressure barrier's threshold:")],
+        ['pressure-timeout',_("Pressure barrier's timeout:")]
     ];
     settings_array.forEach(function (s) {
         settings_spin = Gtk.SpinButton.new_with_range(0,10000,1);
@@ -108,8 +126,8 @@ function buildPrefsWidget() {
 
     settings_vbox = new Gtk.VBox({margin_left: 20, margin_top: 10, margin_bottom: 10, spacing: 6});
     settings_array = [
-        ['animation-time-overview',_("Slide animation time when entering/leaving overview.")],
-        ['animation-time-autohide',_("Slide animation time when mouse approaches edge of the screen.")]
+        ['animation-time-overview',_("Slide animation time when entering/leaving overview:")],
+        ['animation-time-autohide',_("Slide animation time when mouse approaches edge of the screen:")]
     ];
     settings_array.forEach(function (s) {
         settings_spin = Gtk.SpinButton.new_with_range(0.0,1.0,0.1);
@@ -200,7 +218,7 @@ function buildPrefsWidget() {
     treeview.set_headers_visible(false);
 
     settings_hbox.pack_start(new Gtk.Label({
-        label: _("Key that triggers the bar to be shown."),
+        label: _("Key that triggers the bar to be shown:"),
         use_markup: true,
         xalign: 0
     }), true, true, 0);
@@ -220,7 +238,7 @@ function buildPrefsWidget() {
 
     settings_hbox = new Gtk.HBox();
     settings_hbox.pack_start(new Gtk.Label({
-        label: _("Delay before the bar rehides after key press."),
+        label: _("Delay before the bar rehides after key press:"),
         use_markup: true,
         xalign: 0
     }), true, true, 0);
@@ -236,7 +254,7 @@ function buildPrefsWidget() {
     settings_vbox.pack_start(settings_hbox, false,false, 0);
 
     settings_array = [
-        ['shortcut-toggles',_("Pressing the shortcut again rehides the panel.")],
+        ['shortcut-toggles',_("Pressing the shortcut again rehides the panel")],
     ];
     settings_array.forEach(function (s) {
         settings_onoff = new Gtk.Switch({active: settings.get_boolean(s[0])});
