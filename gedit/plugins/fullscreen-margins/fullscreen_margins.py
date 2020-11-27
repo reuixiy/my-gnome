@@ -103,7 +103,7 @@ class FullscreenMargins(GObject.Object, Gedit.WindowActivatable):
         sidepanel_width = sidepanel.get_allocated_width() if sidepanel_visible else 0
         # Calculate margins
         margins = scr_width - text_width - scrollbar_width - sidepanel_width
-        return int(margins / 2)
+        return int(margins / 1.8)
 
     def set_all_margins(self):
         """Set margins width to self.margins in all views."""

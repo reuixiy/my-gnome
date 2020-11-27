@@ -82,9 +82,18 @@ function onTrayIconAdded(o, icon, role, delay=1000) {
     // loop through the array and hide the extension if extension X is enabled and corresponding application is running
     let iconWmClass = icon.wm_class ? icon.wm_class.toLowerCase() : '';
     for (let [wmClass, uuid] of blacklist) {
-        if (Main.extensionManager.lookup(uuid) &&
-            iconWmClass === wmClass)
-            return;
+        if (Main.extensionManager === undefined) {
+            // For gnome-shell < 3.33.90
+            if (ExtensionUtils.extensions[uuid] !== undefined &&
+                ExtensionUtils.extensions[uuid].state === 1 &&
+                iconWmClass === wmClass)
+                return;
+        } else {
+            // For gnome-shell >= 3.33.90
+            if (Main.extensionManager.lookup(uuid) &&
+                iconWmClass === wmClass)
+                return;
+        }
     }
 
     let iconContainer = new St.Button({child: icon, visible: false});
@@ -189,7 +198,7 @@ function createTray() {
 }
 
 function destroyTray() {
-    iconsContainer.actor.destroy();
+    iconsContainer.destroy();
     iconsContainer = null;
     iconsBoxLayout = null;
     icons = [];
@@ -262,9 +271,9 @@ function moveToTray() {
         iconsBoxLayout = null;
     }
     if (iconsContainer) {
-        if (iconsContainer.actor) {
-            iconsContainer.actor.destroy();
-            iconsContainer.actor = null;
+        if (iconsContainer) {
+            iconsContainer.destroy();
+            iconsContainer = null;
         }
         iconsContainer = null;
     }
@@ -371,14 +380,17 @@ function setSize(icon) {
     let scaleFactor = St.ThemeContext.get_for_stage(global.stage).scale_factor;
 
     if (arguments.length == 1) {
+        icon.get_parent().set_size(iconSize * scaleFactor, iconSize * scaleFactor);
         //icon.set_size(iconSize * scaleFactor, iconSize * scaleFactor);
         icon.set_height(iconSize * scaleFactor);
-        icon.set_y_align(Clutter.ActorAlign.CENTER);
+        icon.set_y_align(Clutter.ActorAlign.CENTER)
     } else {
-        for (let i = 0; i < icon.length; i++) {
+        for (let i = 0; i < icons.length; i++) {
+            let icon = icons[i];
+            icon.get_parent().set_size(iconSize * scaleFactor, iconSize * scaleFactor);
             //icon.set_size(iconSize * scaleFactor, iconSize * scaleFactor);
             icon.set_height(iconSize * scaleFactor);
-            icon.set_y_align(Clutter.ActorAlign.CENTER);
+            icon.set_y_align(Clutter.ActorAlign.CENTER)
         }
     }
 
@@ -388,7 +400,7 @@ function setSpacing() {
 
     let boxLayoutSpacing = settings.get_int('icon-spacing');
 
-    iconsBoxLayout.set_style('spacing: ' + boxLayoutSpacing + 'px; margin: 0 0.5em;');
+    iconsBoxLayout.set_style('spacing: ' + boxLayoutSpacing + 'px; margin_top: 2px; margin_bottom: 2px;');
 
 }
 

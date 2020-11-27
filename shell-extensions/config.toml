@@ -1,3 +1,8 @@
+[coverflowalttab]
+elastic-mode=false
+icon-style='Overlay'
+switcher-style='Coverflow'
+
 [dash-to-dock]
 apply-custom-theme=false
 autohide-in-fullscreen=true
@@ -15,9 +20,12 @@ intellihide=true
 intellihide-mode='FOCUS_APPLICATION_WINDOWS'
 isolate-monitors=true
 isolate-workspaces=true
+middle-click-action='launch'
 multi-monitor=true
 preferred-monitor=0
 running-indicator-style='DEFAULT'
+shift-click-action='minimize'
+shift-middle-click-action='launch'
 transparency-mode='FIXED'
 
 [hidetopbar]
@@ -60,15 +68,21 @@ dock-fixed=false
 dock-position='LEFT'
 hide-dash=false
 hide-workspace-switcher-popup=false
+ignore-context-menus=true
+ignore-top-panel=true
 intellihide=true
 intellihide-action='SHOW_FULL'
+intellihide-option=0
 opaque-background=true
+overview-action='SHOW_FULL'
 pressure-threshold=120.0
 require-pressure-to-show=true
 screen-edge-padding=0.0
 scroll-with-touchpad=false
 show-delay=0.25
 straight-corners=false
+thumbnail-size=0.070000000000000007
 thumbnail-visible-width=30.0
+toggle-overview=false
 top-margin=0.0
 workspace-captions=true
