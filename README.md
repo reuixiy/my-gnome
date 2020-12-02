@@ -31,10 +31,8 @@ cp -r gedit/* ~/.local/share/gedit/
 dconf load /org/gnome/gedit/plugins/ < gedit/plugins/config.toml
 
 # icons
-cd ~/.icons
-git clone https://github.com/PapirusDevelopmentTeam/papirus-icon-theme --depth 1
-cp -r papirus-icon-theme/Papirus-Dark/* Papirus-Dark/
-gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
+sudo pacman -S papirus-icon-theme
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
 ```
 
 ## todo
