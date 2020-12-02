@@ -28,6 +28,10 @@ shift-click-action='minimize'
 shift-middle-click-action='launch'
 transparency-mode='FIXED'
 
+[emoji-selector]
+always-show=false
+emoji-keybinding=['<Super>e']
+
 [hidetopbar]
 enable-active-window=true
 enable-intellihide=true
