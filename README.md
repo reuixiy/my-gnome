@@ -36,7 +36,7 @@ dconf load /org/gnome/gedit/plugins/ < gedit/plugins/config.toml
 
 # icons
 sudo pacman -S papirus-icon-theme
-gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
+gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 ```
 
 ## todo
