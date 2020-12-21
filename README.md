@@ -1,6 +1,6 @@
 # my-gnome
 
-![gnome-version](https://img.shields.io/badge/GNOME-v3.38.1%2B-blue?logo=gnome)
+![gnome-version](https://img.shields.io/badge/GNOME-v3.38.2%2B-blue?logo=gnome)
 
 My GNOME themes, shell extensions, and more.
 
