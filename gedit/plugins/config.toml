@@ -1,2 +1,28 @@
-[/]
-active-plugins=['time', 'fullscreen_margins', 'linespacing']
+[plugins]
+active-plugins=['time', 'restore_overlay_scrolling', 'fullscreen_margins', 'linespacing']
+
+[preferences/editor]
+auto-save=true
+display-line-numbers=false
+editor-font='STShusong 12'
+highlight-current-line=false
+insert-spaces=true
+scheme='builder-dark'
+tabs-size=uint32 2
+use-default-font=false
+wrap-last-split-mode='word'
+wrap-mode='word'
+
+[preferences/ui]
+show-tabs-mode='auto'
+statusbar-visible=false
+
+[state/file-chooser]
+open-recent=false
+
+[state/window]
+bottom-panel-size=140
+side-panel-active-page='GeditWindowDocumentsPanel'
+side-panel-size=200
+size=(787, 519)
+state=87168
