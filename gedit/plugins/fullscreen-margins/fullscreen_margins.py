@@ -89,8 +89,8 @@ class FullscreenMargins(GObject.Object, Gedit.WindowActivatable):
         scr_width = screen.get_monitor_geometry(monitor_n).width
         # Get gutter width
         view = self.window.get_active_view()
-        # gutter_win = view.get_gutter(Gtk.TextWindowType.LEFT).get_window()
-        # gutter_width = gutter_win.get_width() if gutter_win else 0
+        gutter_win = view.get_window(Gtk.TextWindowType.LEFT)
+        gutter_width = gutter_win.get_width() if gutter_win else 0
         # Get scrollbar width
         scrollbar = view.get_parent().get_vscrollbar()
         scrollbar_width = scrollbar.get_allocated_width()
@@ -102,7 +102,7 @@ class FullscreenMargins(GObject.Object, Gedit.WindowActivatable):
         sidepanel_visible = sidepanel.get_visible()
         sidepanel_width = sidepanel.get_allocated_width() if sidepanel_visible else 0
         # Calculate margins
-        margins = scr_width - text_width - scrollbar_width - sidepanel_width
+        margins = scr_width - text_width - gutter_width - scrollbar_width - sidepanel_width
         return int(margins / 2)
 
     def set_all_margins(self):
@@ -115,9 +115,6 @@ class FullscreenMargins(GObject.Object, Gedit.WindowActivatable):
         margins = self.margins
         if margins < 2:
             margins = 2
-        # Don't add left margin if margin indicator is shown,
-        # because Gedit would do it automatically
-        if not view.get_show_right_margin():
-            view.set_left_margin(margins)
+        view.set_left_margin(margins)
         view.set_right_margin(margins)
         view.set_bottom_margin(margins)
