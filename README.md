@@ -1,10 +1,10 @@
 # my-gnome
 
-![gnome-version](https://img.shields.io/badge/GNOME-v3.38.4-blue?logo=gnome)
+![gnome-version](https://img.shields.io/badge/GNOME-v41.4-blue?logo=gnome)
 
 My GNOME themes, shell extensions, and more.
 
-![my-gnome.png](https://raw.githubusercontent.com/reuixiy/io-oi.me/master/static/images/my-gnome.png)
+![my-gnome.png](./screenshot.jpg)
 
 ## usage
 
@@ -13,20 +13,30 @@ git clone https://github.com/reuixiy/my-gnome.git --depth 1
 cd my-gnome
 
 # themes
-cp -r themes/* ~/.themes/
-gsettings set org.gnome.desktop.interface gtk-theme 'Mc-OS-CTLina-Gnome-Dark-1.3'
+# https://github.com/vinceliuice/WhiteSur-gtk-theme
+git clone https://github.com/vinceliuice/WhiteSur-gtk-theme.git ~/.themes/source
+
+~/.themes/source/install.sh -i gnome
+gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-dark'
 
 # gnome shell extensions
-cp -r shell-extensions/* ~/.local/share/gnome-shell/extensions/
-yay -S gnome-shell-extension-proxy-switcher-git gnome-shell-extension-emoji-selector-git
+yay -S gnome-shell-extension-proxy-switcher-git
 
-# alt + f2 required on xorg / restart required on wayland
+# install each extension firstly
+# alt + f2 required on xorg / restart required on wayland after enabled
+
+# https://extensions.gnome.org/extension/615/appindicator-support/
+gnome-extensions enable appindicatorsupport\@rgcjonas.gmail.com
+# https://extensions.gnome.org/extension/3193/blur-my-shell/
+gnome-extensions enable blur-my-shell\@aunetx
+# https://extensions.gnome.org/extension/97/coverflow-alt-tab/
 gnome-extensions enable CoverflowAltTab\@dmo60.de
+# https://extensions.gnome.org/extension/307/dash-to-dock/
 gnome-extensions enable dash-to-dock\@micxgx.gmail.com
+# https://extensions.gnome.org/extension/545/hide-top-bar/
 gnome-extensions enable hidetopbar\@mathieu.bidon.ca
-gnome-extensions enable simplenetspeed\@biji.extension
-gnome-extensions enable TopIcons\@phocean.net
-gnome-extensions enable workspaces-to-dock\@passingthru67.gmail.com
+# https://extensions.gnome.org/extension/3724/net-speed-simplified/
+gnome-extensions enable netspeedsimplified\@prateekmedia.extension
 
 dconf load /org/gnome/shell/extensions/ < shell-extensions/config.toml
 
@@ -39,10 +49,6 @@ sudo pacman -S papirus-icon-theme
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 ```
 
-## todo
-
-- [ ] shell script
-
 ## acknowledgement
 
-1. https://gist.github.com/balderclaassen/d12cfb70b1695c11402116d8b7f79059
+https://gist.github.com/balderclaassen/d12cfb70b1695c11402116d8b7f79059
